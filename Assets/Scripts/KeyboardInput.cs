@@ -15,4 +15,12 @@ public class KeyboardInput: IinputProvider
 		return Vector3.zero;
 	}
 
+	public bool GetFire()
+	{
+		if (Input.GetKey(KeyCode.Space))
+		{
+			return true;
+		}
+		return false;
+	}
 }

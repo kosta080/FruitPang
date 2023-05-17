@@ -1,22 +1,23 @@
 using UnityEngine;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
+    public enum InputMethod{NotSet,Keyboard,Gui}
+    public InputMethod CurrentInputMethod;
+    public IinputProvider inputProvider;
+
     [SerializeField] private GameObject character;
     [SerializeField] private float moveSpeed;
 
-    private KeyboardInput keyboardInput;
-    private GuiInput guiInput;
-
-    public IinputProvider inputProvider;
-
+    private InputMethod PrevInputMethod = InputMethod.NotSet;
+    private KeyboardInput keyboardInput = new KeyboardInput();
+    private GuiInput guiInput = new GuiInput();
     private Animator characterAnimator;
     private SpriteRenderer characterSprite;
+
     private void Start()
     {
-        keyboardInput = new KeyboardInput();
-        guiInput = new GuiInput();
-
         ChangeInputMethod();
 
         Debug.Log(character);
@@ -32,38 +33,42 @@ public class PlayerController : MonoBehaviour
     }
     private void ChangeInputMethod()
     {
-        inputProvider = guiInput;
+        if (CurrentInputMethod == InputMethod.Gui)
+            inputProvider = guiInput;
+        else if (CurrentInputMethod == InputMethod.Keyboard)
+            inputProvider = keyboardInput;
     }
 
 
     private void Update()
     {
-        character.transform.position += inputProvider.GetAxies() * moveSpeed * Time.deltaTime;
         bool runState = false;
+
+        if (CurrentInputMethod != PrevInputMethod)
+        {
+            PrevInputMethod = CurrentInputMethod;
+            ChangeInputMethod();
+        }
+
         if (inputProvider.GetAxies().x > 0)
         {
             characterSprite.flipX = false;
             runState = true;
-            characterAnimator.SetBool("Run", true);
         }
         else if (inputProvider.GetAxies().x < 0)
         {
             characterSprite.flipX = true;
             runState = true;
-            characterAnimator.SetBool("Run", true);
         }
         else
         {
             runState = false;
-
         }
 
         if (characterAnimator.GetBool("Run") != runState)
             characterAnimator.SetBool("Run", runState);
+
+        character.transform.position += inputProvider.GetAxies() * moveSpeed * Time.deltaTime;
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision.gameObject.name);
-    }
 }

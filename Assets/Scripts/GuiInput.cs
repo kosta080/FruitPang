@@ -15,4 +15,13 @@ public class GuiInput : IinputProvider
 		}
 		return Vector3.zero;
 	}
+
+	public bool GetFire()
+	{
+		if (GuiInputProv.Instance.clickFire)
+		{
+			return true;
+		}
+		return false;
+	}
 }

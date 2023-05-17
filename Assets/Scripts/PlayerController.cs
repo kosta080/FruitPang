@@ -2,18 +2,23 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]private GameObject character;
-    [SerializeField]private float moveSpeed;
+    [SerializeField] private GameObject character;
+    [SerializeField] private float moveSpeed;
 
-    private KeyboardInput KeyboardInput;
-    private IinputProvider inputProvider;
+    private KeyboardInput keyboardInput;
+    private GuiInput guiInput;
+
+    public IinputProvider inputProvider;
 
     private Animator characterAnimator;
     private SpriteRenderer characterSprite;
-    void Start()
+    private void Start()
     {
-        KeyboardInput = new KeyboardInput();
-        inputProvider = KeyboardInput;
+        keyboardInput = new KeyboardInput();
+        guiInput = new GuiInput();
+
+        ChangeInputMethod();
+
         Debug.Log(character);
         if (character)
         {
@@ -25,9 +30,13 @@ public class PlayerController : MonoBehaviour
             Debug.LogWarning("Player controller needs reference to a character GameObject");
         }
     }
+    private void ChangeInputMethod()
+    {
+        inputProvider = guiInput;
+    }
 
 
-    void Update()
+    private void Update()
     {
         character.transform.position += inputProvider.GetAxies() * moveSpeed * Time.deltaTime;
         bool runState = false;
@@ -46,11 +55,15 @@ public class PlayerController : MonoBehaviour
         else
         {
             runState = false;
-   
+
         }
 
-        if(characterAnimator.GetBool("Run") != runState)
+        if (characterAnimator.GetBool("Run") != runState)
             characterAnimator.SetBool("Run", runState);
+    }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject.name);
     }
 }

@@ -1,0 +1,18 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GuiInput : IinputProvider
+{
+	public Vector3 GetAxies()
+	{
+		if (GuiInputProv.Instance.clickLeft)
+		{
+			return Vector3.left;
+		}
+		else if(GuiInputProv.Instance.clickRight)
+		{
+			return Vector3.right;
+		}
+		return Vector3.zero;
+	}
+}

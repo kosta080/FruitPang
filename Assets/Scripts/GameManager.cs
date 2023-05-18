@@ -9,11 +9,23 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform targetContainer;
     [SerializeField] private Transform arrowContainer;
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private GameObject getReady;
 
-    public void PlayerDeath()
+	public void PlayerDeath()
     {
         Time.timeScale = 0;
         StartCoroutine(restartLevel());
+    }
+	private void Start()
+	{
+        Time.timeScale = 0;
+        StartCoroutine(startLevel());
+    }
+    private IEnumerator startLevel()
+    {
+        yield return new WaitForSecondsRealtime(2.0f);
+        getReady.SetActive(false);
+        Time.timeScale = 1;
     }
     private IEnumerator restartLevel()
     {

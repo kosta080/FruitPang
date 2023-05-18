@@ -3,8 +3,8 @@ using UnityEngine;
 public class ArrowBowController : MonoBehaviour
 {
     [SerializeField] private float arrowSpeed;
-    
-    void Update()
+
+    private void Update()
     {
         transform.position += new Vector3(0, arrowSpeed, 0) * Time.deltaTime;
     }

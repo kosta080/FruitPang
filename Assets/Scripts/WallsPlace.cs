@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WallsPlace : MonoBehaviour
@@ -10,12 +8,12 @@ public class WallsPlace : MonoBehaviour
     private int lastScreenHeight = 0;
     private Camera cam;
 
-    void Start()
+    private void Start()
     {
         cam = Camera.main;
     }
 
-    void Update()
+    private void Update()
     {
         if (lastScreenWidth != Screen.width || lastScreenHeight  != Screen.height)
         {

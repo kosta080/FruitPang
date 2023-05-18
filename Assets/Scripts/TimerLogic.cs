@@ -1,11 +1,11 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Timer : MonoBehaviour
+
+public class TimerLogic : MonoBehaviour
 {
-    [SerializeField] private Text rimerText;
+    
     [SerializeField] private float roundTime;
-    [SerializeField] private string timerPrefix;
+    [SerializeField] private TimerDisplay timerDisplay;
 
     private int secondsLeft;
     private float roundTimeCount;
@@ -40,7 +40,7 @@ public class Timer : MonoBehaviour
         if (secondsLeft != secondsLeftNew)
         {
             secondsLeft = secondsLeftNew;
-            rimerText.text = timerPrefix + secondsLeft;
+            timerDisplay.UpdateTime(secondsLeft);
         }
     }
 }

@@ -9,8 +9,8 @@ public class ArrowSpawner : MonoBehaviour
     
     public void SpawnArrow(Vector3 _position)
     {
-        GameObject ar =  Instantiate(arrowPrefab, arrowContainer);
-        ar.transform.position = _position;
+        GameObject arrow =  Instantiate(arrowPrefab, arrowContainer);
+		arrow.transform.position = _position;
     }
 
 	private void Awake()

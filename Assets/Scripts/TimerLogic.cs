@@ -33,7 +33,7 @@ public class TimerLogic : MonoBehaviour
         {
             roundStarted = false;
             roundTimeCount = 0;
-            GameManager.Instance.PlayerDeath();
+            GameManager.Instance.TimeIsUp();
         }
 
         int secondsLeftNew = (int)Mathf.Floor(roundTimeCount);

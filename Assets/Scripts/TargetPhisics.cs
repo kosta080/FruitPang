@@ -6,7 +6,7 @@ public class TargetPhisics : MonoBehaviour
 	private float startScale = 12.0f; // initial scale biggerst target
 	private float xStartSpeed = 4.0f;
 	private float yStartSpeed = 6.0f;
-	private enum direction { right,left};
+	
 	public void SetScale(float _scale)
 	{
 		startScale = _scale;
@@ -17,7 +17,7 @@ public class TargetPhisics : MonoBehaviour
 	}
 	public void SetDir(int _direction)
 	{
-		if (_direction == (int)direction.left)
+		if (_direction == (int)TargetSpawner.direction.left)
 		{
 			xStartSpeed *= -1;
 		}

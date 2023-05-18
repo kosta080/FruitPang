@@ -8,7 +8,7 @@ public class TargetSpawner : MonoBehaviour
 	[SerializeField] private GameObject targetsContainer;
     [SerializeField] private GameObject targetPrefab;
 
-	private enum direction { right,left}
+	public enum direction { right,left}
 	private void Start()
 	{
 		StartCoroutine(spawnTaret());

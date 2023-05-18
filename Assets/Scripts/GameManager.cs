@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,22 +9,30 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform targetContainer;
     [SerializeField] private Transform arrowContainer;
     [SerializeField] private PlayerController playerController;
-    [SerializeField] private GameObject getReady;
+    [SerializeField] private SplashTextManager splashTextManager;
 
 	public void PlayerDeath()
     {
+        splashTextManager.ShowYouDied();
         Time.timeScale = 0;
         StartCoroutine(restartLevel());
     }
-	private void Start()
+    public void TimeIsUp()
+    {
+        splashTextManager.ShowTimeIsUp();
+        Time.timeScale = 0;
+        StartCoroutine(restartLevel());
+    }
+    private void Start()
 	{
         Time.timeScale = 0;
         StartCoroutine(startLevel());
     }
     private IEnumerator startLevel()
     {
+        splashTextManager.ShowGetReady();
         yield return new WaitForSecondsRealtime(2.0f);
-        getReady.SetActive(false);
+        splashTextManager.HideText();
         Time.timeScale = 1;
     }
     private IEnumerator restartLevel()
@@ -43,6 +51,7 @@ public class GameManager : MonoBehaviour
         }
 
         playerController.ResetPlayer();
+        splashTextManager.HideText();
         Time.timeScale = 1;
     }
 

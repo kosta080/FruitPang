@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject character;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float fireDelay;
+    [SerializeField] private Vector3 initialPlayerPosition;
 
     private InputMethod PrevInputMethod = InputMethod.NotSet;
     private KeyboardInput keyboardInput = new KeyboardInput();
@@ -16,11 +17,10 @@ public class PlayerController : MonoBehaviour
     private Animator characterAnimator;
     private SpriteRenderer characterSprite;
     private float nextShot;
-    private Vector3 initialPlayerPosition;
+    
 
     public void ResetPlayer()
     {
-        Debug.Log(initialPlayerPosition);
         character.transform.position = initialPlayerPosition;
         characterAnimator.SetTrigger("Restart");
     }
@@ -32,9 +32,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         ChangeInputMethod();
-        initialPlayerPosition = transform.position;
 
-        Debug.Log(character);
         if (character)
         {
             characterAnimator = character.GetComponent<Animator>();

@@ -25,7 +25,6 @@ public class TargetPhisics : MonoBehaviour
 	}
 	private void Start()
 	{
-		Debug.Log(xStartSpeed);
 		rb = GetComponent<Rigidbody2D>();
 		rb.velocity = new Vector2(xStartSpeed, yStartSpeed);
 		transform.localScale = new Vector3(startScale, startScale, startScale);

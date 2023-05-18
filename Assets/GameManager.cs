@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
         }
 
         playerController.ResetPlayer();
+        Time.timeScale = 1;
     }
 
     private void Awake()

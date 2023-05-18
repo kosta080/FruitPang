@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,12 +8,14 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private GameObject character;
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float fireDelay;
 
     private InputMethod PrevInputMethod = InputMethod.NotSet;
     private KeyboardInput keyboardInput = new KeyboardInput();
     private GuiInput guiInput = new GuiInput();
     private Animator characterAnimator;
     private SpriteRenderer characterSprite;
+    private float nextShot;
 
     private void Start()
     {
@@ -44,12 +45,14 @@ public class PlayerController : MonoBehaviour
     {
         bool runState = false;
 
+        //change input method if CurrentInputMethod was changed
         if (CurrentInputMethod != PrevInputMethod)
         {
             PrevInputMethod = CurrentInputMethod;
             ChangeInputMethod();
         }
 
+        //handle movement left, right, stop
         if (inputProvider.GetAxies().x > 0)
         {
             characterSprite.flipX = false;
@@ -64,11 +67,20 @@ public class PlayerController : MonoBehaviour
         {
             runState = false;
         }
-
+        //trigger animatins
         if (characterAnimator.GetBool("Run") != runState)
             characterAnimator.SetBool("Run", runState);
 
+        //move character
         character.transform.position += inputProvider.GetAxies() * moveSpeed * Time.deltaTime;
+
+        //handle fire
+        if (inputProvider.GetFire() && nextShot < 0.1)
+        {
+            nextShot = fireDelay;
+            ArrowSpawner.Instance.SpawnArrow(character.transform.position);
+        }
+        nextShot -= Time.deltaTime;
     }
 
 }

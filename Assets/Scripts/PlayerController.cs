@@ -16,10 +16,23 @@ public class PlayerController : MonoBehaviour
     private Animator characterAnimator;
     private SpriteRenderer characterSprite;
     private float nextShot;
+    private Vector3 initialPlayerPosition;
+
+    public void ResetPlayer()
+    {
+        Debug.Log(initialPlayerPosition);
+        character.transform.position = initialPlayerPosition;
+        characterAnimator.SetTrigger("Restart");
+    }
+    public void StartDeathAnim()
+    {
+        characterAnimator.SetTrigger("Death");
+    }
 
     private void Start()
     {
         ChangeInputMethod();
+        initialPlayerPosition = transform.position;
 
         Debug.Log(character);
         if (character)
@@ -32,14 +45,6 @@ public class PlayerController : MonoBehaviour
             Debug.LogWarning("Player controller needs reference to a character GameObject");
         }
     }
-    private void ChangeInputMethod()
-    {
-        if (CurrentInputMethod == InputMethod.Gui)
-            inputProvider = guiInput;
-        else if (CurrentInputMethod == InputMethod.Keyboard)
-            inputProvider = keyboardInput;
-    }
-
 
     private void Update()
     {
@@ -82,5 +87,13 @@ public class PlayerController : MonoBehaviour
         }
         nextShot -= Time.deltaTime;
     }
+    private void ChangeInputMethod()
+    {
+        if (CurrentInputMethod == InputMethod.Gui)
+            inputProvider = guiInput;
+        else if (CurrentInputMethod == InputMethod.Keyboard)
+            inputProvider = keyboardInput;
+    }
+
 
 }

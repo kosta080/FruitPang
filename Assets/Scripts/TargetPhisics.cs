@@ -39,5 +39,10 @@ public class TargetPhisics : MonoBehaviour
 			TargetSpawner.Instance.SpawnNextGen(transform.position, startScale); //spawn new Targets
 			Destroy(gameObject); // destroy this target
 		}
+
+		if (_collision.gameObject.tag == "Player")
+		{
+			GameManager.Instance.PlayerDeath();
+		}
 	}
 }

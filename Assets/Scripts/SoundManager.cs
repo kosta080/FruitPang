@@ -14,10 +14,15 @@ public class SoundManager : MonoBehaviour
 	public AudioClip targetHit;
 	public AudioClip playerHit;
 	public AudioClip bonusCollected;
+	public AudioClip buttonSound;
 
 	public void PlaySfx(AudioClip _audioClip)
 	{
 		createAndPlaySound(_audioClip, false);
+	}
+	public void PlayMusic()
+	{
+		createAndPlaySound(music, true);
 	}
 	private void createAndPlaySound(AudioClip clip,bool _loop)
 	{
@@ -39,8 +44,7 @@ public class SoundManager : MonoBehaviour
 		}
 		Instance = this;
 	}
-	private void Start()
-	{
-		createAndPlaySound(music, true);
-	}
+
+		
+	
 }

@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     {
         character.transform.position = initialPlayerPosition;
         characterAnimator.SetTrigger("Restart");
+        characterAnimator.SetBool("Run", false);
+        characterSprite.flipX = false;
     }
     public void StartDeathAnim()
     {

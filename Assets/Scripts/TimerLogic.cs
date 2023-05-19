@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class TimerLogic : MonoBehaviour
 {
-    
+    public static TimerLogic Instance { get; private set; }
+
     [SerializeField] private float roundTime;
     [SerializeField] private TimerDisplay timerDisplay;
 
@@ -16,7 +17,7 @@ public class TimerLogic : MonoBehaviour
         roundStarted = true;
     }
 
-	private void Awake()
+	private void Start()
 	{
         ResetRoundTime();
     }
@@ -42,5 +43,14 @@ public class TimerLogic : MonoBehaviour
             secondsLeft = secondsLeftNew;
             timerDisplay.UpdateTime(secondsLeft);
         }
+    }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+        Instance = this;
     }
 }

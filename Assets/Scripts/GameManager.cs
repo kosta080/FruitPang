@@ -49,9 +49,12 @@ public class GameManager : MonoBehaviour
 	{
         Time.timeScale = 0;
         StartCoroutine(startLevel());
+        SoundManager.Instance.PlayMusic();
     }
     private IEnumerator startLevel()
     {
+        TimerLogic.Instance.ResetRoundTime();
+        TargetSpawner.Instance.SpawnTarget();
         playerData.ResetScore();
         splashTextManager.ShowGetReady();
         yield return new WaitForSecondsRealtime(2.0f);
@@ -79,7 +82,8 @@ public class GameManager : MonoBehaviour
 
         playerController.ResetPlayer();
         splashTextManager.HideText();
-        Time.timeScale = 1;
+        yield return new WaitForSecondsRealtime(0.5f);
+        StartCoroutine(startLevel());
     }
     private IEnumerator winLevel()
     {
@@ -100,5 +104,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         Instance = this;
+
+        Application.targetFrameRate = 60;
     }
 }

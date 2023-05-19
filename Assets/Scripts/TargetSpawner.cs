@@ -9,27 +9,13 @@ public class TargetSpawner : MonoBehaviour
 	[SerializeField] private GameObject bonusesContainer;
     [SerializeField] private GameObject targetPrefab;
     [SerializeField] private GameObject[] bonussPrefabs;
-	[SerializeField] private int targetsSpawnCount;
+	//[SerializeField] private int targetsSpawnCount;
 	[SerializeField] private float spawnTimeInterval;
 	[SerializeField] private float chenceBonusSpawn;
 
 	public enum direction { right,left}
-	private void Start()
-	{
-		StartCoroutine(spawnTaret());
-	}
-
-	private IEnumerator spawnTaret()
-	{
-		while (targetsSpawnCount > 0 )
-		{
-			//second arg is scale target state that can be 0,1,2,3
-			spawnTarget(Vector3.zero, 0, (int)direction.right);
-			targetsSpawnCount--;
-			yield return new WaitForSeconds(spawnTimeInterval);
-		}
-	}
-
+	public void SpawnTarget() => spawnTarget(Vector3.zero, 0, (int)direction.right);
+	
 	public void SpawnNextGen(Vector3 _position, int _scaleState, int _scaleStateCount)
 	{
 		//allow spawn next generation of targets if the scales array has value in _scaleState position +1

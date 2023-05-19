@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class TargetPhisics : MonoBehaviour
 {
+	[SerializeField] private int targetScoreValue;
 	private Rigidbody2D rb;
-	private float startScale = 12.0f; // initial scale biggerst target
+	private float[] scales = { 12.0f ,10.0f,8.0f,4.0f}; // initial scale biggerst target
+	private int scaleState = 0;
 	private float xStartSpeed = 4.0f;
 	private float yStartSpeed = 6.0f;
 	
-	public void SetScale(float _scale)
+	public void SetScale(int state)
 	{
-		startScale = _scale;
+		scaleState = state;
 	}
 	public void SetPos(Vector3 _position)
 	{
@@ -21,13 +23,12 @@ public class TargetPhisics : MonoBehaviour
 		{
 			xStartSpeed *= -1;
 		}
-		//rb.velocity = new Vector2(4.0f, horisontalSpeed);
 	}
 	private void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
 		rb.velocity = new Vector2(xStartSpeed, yStartSpeed);
-		transform.localScale = new Vector3(startScale, startScale, startScale);
+		transform.localScale = new Vector3(scales[scaleState], scales[scaleState], scales[scaleState]);
 	}
 
 	private void OnCollisionEnter2D(Collision2D _collision)
@@ -35,12 +36,15 @@ public class TargetPhisics : MonoBehaviour
 		if (_collision.gameObject.tag == "Arrow")
 		{
 			Destroy(_collision.gameObject); // destroy Arrow
-			TargetSpawner.Instance.SpawnNextGen(transform.position, startScale); //spawn new Targets
+			TargetSpawner.Instance.SpawnNextGen(transform.position, scaleState, scales.Length); //spawn new Targets
+			GameManager.Instance.TargetHit(targetScoreValue);
+			SoundManager.Instance.PlaySfx(SoundManager.Instance.targetHit);
 			Destroy(gameObject); // destroy this target
 		}
 
 		if (_collision.gameObject.tag == "Player")
 		{
+			SoundManager.Instance.PlaySfx(SoundManager.Instance.playerHit);
 			GameManager.Instance.PlayerDeath();
 		}
 	}

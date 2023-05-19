@@ -6,7 +6,12 @@ public class TargetSpawner : MonoBehaviour
 	public static TargetSpawner Instance { get; private set; }
 
 	[SerializeField] private GameObject targetsContainer;
+	[SerializeField] private GameObject bonusesContainer;
     [SerializeField] private GameObject targetPrefab;
+    [SerializeField] private GameObject[] bonussPrefabs;
+	[SerializeField] private int targetsSpawnCount;
+	[SerializeField] private float spawnTimeInterval;
+	[SerializeField] private float chenceBonusSpawn;
 
 	public enum direction { right,left}
 	private void Start()
@@ -16,28 +21,41 @@ public class TargetSpawner : MonoBehaviour
 
 	private IEnumerator spawnTaret()
 	{
-		while (true)
+		while (targetsSpawnCount > 0 )
 		{
-			//10 8 6 4
-			spawnTarget(Vector3.zero, 10.0f, (int)direction.right);
-			yield return new WaitForSeconds(10.0f);
+			//second arg is scale target state that can be 0,1,2,3
+			spawnTarget(Vector3.zero, 0, (int)direction.right);
+			targetsSpawnCount--;
+			yield return new WaitForSeconds(spawnTimeInterval);
 		}
 	}
 
-	public void SpawnNextGen(Vector3 _position, float _scale)
+	public void SpawnNextGen(Vector3 _position, int _scaleState, int _scaleStateCount)
 	{
-		if (_scale > 4)
+		//allow spawn next generation of targets if the scales array has value in _scaleState position +1
+		if (_scaleState+1 < _scaleStateCount)
 		{
-			spawnTarget(_position, _scale - 4, (int)direction.right);
-			spawnTarget(_position, _scale - 4, (int)direction.left);
+			spawnTarget(_position, _scaleState+1, (int)direction.right);
+			spawnTarget(_position, _scaleState+1, (int)direction.left);
 		}
+		spawnRandomBonus(_position);
 	}
-	private void spawnTarget(Vector3 _position, float _scale, int _direction)
+	private void spawnTarget(Vector3 _position, int _scaleState, int _direction)
 	{
-		TargetPhisics targethisics =  Instantiate(targetPrefab, targetsContainer.transform).GetComponent<TargetPhisics>();
-		targethisics.SetScale(_scale);
-		targethisics.SetPos(_position);
-		targethisics.SetDir(_direction);
+		TargetPhisics targetPhisics =  Instantiate(targetPrefab, targetsContainer.transform).GetComponent<TargetPhisics>();
+		targetPhisics.SetScale(_scaleState);
+		targetPhisics.SetPos(_position);
+		targetPhisics.SetDir(_direction);
+	}
+	private void spawnRandomBonus(Vector3 _position)
+	{
+		float r = Random.value;
+		if (r < chenceBonusSpawn)
+		{
+			int randomBonus = Random.Range(0, bonussPrefabs.Length-1);
+			BonusPhisics bonusPhisics = Instantiate(bonussPrefabs[randomBonus], bonusesContainer.transform).GetComponent<BonusPhisics>(); ;
+			bonusPhisics.SetPos(_position);
+		}
 	}
 
 	private void Awake()

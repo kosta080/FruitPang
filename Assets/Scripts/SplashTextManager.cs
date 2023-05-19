@@ -6,6 +6,8 @@ public class SplashTextManager : MonoBehaviour
     [SerializeField] private string textBeforeGameStarted;
     [SerializeField] private string textAfterPlayerDied;
     [SerializeField] private string textAfterTimeIsUp;
+    [SerializeField] private string textAfterPlayerWon;
+
     private Text splashText;
 
     public void ShowGetReady()
@@ -19,6 +21,10 @@ public class SplashTextManager : MonoBehaviour
     public void ShowTimeIsUp()
     {
         showText(textAfterTimeIsUp);
+    }
+    public void ShowWin()
+    {
+        showText(textAfterPlayerWon);
     }
 
 

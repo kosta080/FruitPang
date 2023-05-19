@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0) return;
+
         bool runState = false;
 
         //handle movement left, right, stop

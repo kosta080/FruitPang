@@ -1,27 +1,49 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    [SerializeField] private PlayerData playerData;
+
     [SerializeField] private Transform targetContainer;
     [SerializeField] private Transform arrowContainer;
+    [SerializeField] private Transform bonusesContainer;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private SplashTextManager splashTextManager;
+    [SerializeField] private bool godMode;
+    [SerializeField] private bool infenateTimeMode;
 
 	public void PlayerDeath()
     {
+        if (godMode) return;
         splashTextManager.ShowYouDied();
         Time.timeScale = 0;
         StartCoroutine(restartLevel());
     }
     public void TimeIsUp()
     {
+        if(infenateTimeMode) return;
         splashTextManager.ShowTimeIsUp();
         Time.timeScale = 0;
         StartCoroutine(restartLevel());
+    }
+    public void TargetHit(int scoreValue)
+    {
+        playerData.AddScore(scoreValue);
+
+        if (winCheck()) 
+        {
+            Time.timeScale = 0;
+            StartCoroutine(winLevel());
+        }
+    }
+    public void BonusCollected(int bonus)
+    {
+        playerData.AddScore(bonus);
     }
     private void Start()
 	{
@@ -30,6 +52,7 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator startLevel()
     {
+        playerData.ResetScore();
         splashTextManager.ShowGetReady();
         yield return new WaitForSecondsRealtime(2.0f);
         splashTextManager.HideText();
@@ -49,10 +72,24 @@ public class GameManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+        foreach (Transform child in bonusesContainer)
+        {
+            Destroy(child.gameObject);
+        }
 
         playerController.ResetPlayer();
         splashTextManager.HideText();
         Time.timeScale = 1;
+    }
+    private IEnumerator winLevel()
+    {
+        splashTextManager.ShowWin();
+        yield return new WaitForSecondsRealtime(2.0f);
+        SceneManager.LoadScene("Summary", LoadSceneMode.Single);
+    }
+    private bool winCheck()
+    {
+        return targetContainer.childCount <= 1;
     }
 
     private void Awake()

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ceiling
   - Arrow
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Targets
   - Floor
   - Arrow
-  - 
+  - Bonus
   - 
   - 
   - 

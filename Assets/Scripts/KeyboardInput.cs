@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class KeyboardInput: IinputProvider
+public class KeyboardInput: IInputProvider
 {
 	public Vector3 GetAxies()
 	{

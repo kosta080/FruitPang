@@ -2,18 +2,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public enum InputMethod{NotSet,Keyboard,Gui}
-    public InputMethod CurrentInputMethod;
-    public IinputProvider inputProvider;
-
     [SerializeField] private GameObject character;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float fireDelay;
     [SerializeField] private Vector3 initialPlayerPosition;
 
-    private InputMethod PrevInputMethod = InputMethod.NotSet;
-    private KeyboardInput keyboardInput = new KeyboardInput();
-    private GuiInput guiInput = new GuiInput();
+    private InputAgrigator inputAgrigator = new InputAgrigator();
+
     private Animator characterAnimator;
     private SpriteRenderer characterSprite;
     private float nextShot;
@@ -31,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        ChangeInputMethod();
+        inputAgrigator.initInput();
 
         if (character)
         {
@@ -48,20 +43,13 @@ public class PlayerController : MonoBehaviour
     {
         bool runState = false;
 
-        //change input method if CurrentInputMethod was changed
-        if (CurrentInputMethod != PrevInputMethod)
-        {
-            PrevInputMethod = CurrentInputMethod;
-            ChangeInputMethod();
-        }
-
         //handle movement left, right, stop
-        if (inputProvider.GetAxies().x > 0)
+        if (inputAgrigator.GetAxies().x > 0)
         {
             characterSprite.flipX = false;
             runState = true;
         }
-        else if (inputProvider.GetAxies().x < 0)
+        else if (inputAgrigator.GetAxies().x < 0)
         {
             characterSprite.flipX = true;
             runState = true;
@@ -75,23 +63,15 @@ public class PlayerController : MonoBehaviour
             characterAnimator.SetBool("Run", runState);
 
         //move character
-        character.transform.position += inputProvider.GetAxies() * moveSpeed * Time.deltaTime;
+        character.transform.position += inputAgrigator.GetAxies() * moveSpeed * Time.deltaTime;
 
         //handle fire
-        if (inputProvider.GetFire() && nextShot < 0.1)
+        if (inputAgrigator.GetFire() && nextShot < 0.1)
         {
             nextShot = fireDelay;
             ArrowSpawner.Instance.SpawnArrow(character.transform.position);
         }
         nextShot -= Time.deltaTime;
     }
-    private void ChangeInputMethod()
-    {
-        if (CurrentInputMethod == InputMethod.Gui)
-            inputProvider = guiInput;
-        else if (CurrentInputMethod == InputMethod.Keyboard)
-            inputProvider = keyboardInput;
-    }
-
 
 }

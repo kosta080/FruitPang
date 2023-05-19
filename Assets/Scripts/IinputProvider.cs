@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IinputProvider
+public interface IInputProvider
 {
     public Vector3 GetAxies();
     public bool GetFire();

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GuiInput : IinputProvider
+public class GuiInput : IInputProvider
 {
 	public Vector3 GetAxies()
 	{

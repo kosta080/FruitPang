@@ -32,7 +32,6 @@
 
 **Ground, walls and ceiling** - all are using box collider 2d and are placed on a specific Layer to control the collisions pairs
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e620f355-0a94-4ea7-9612-275d537d3f27/Untitled.png)
 
 **Character -** uses sprite renderer and animator to visualise the character, uses box collider2d and rigibdody2d to prevent the player from escaping the level boundaries and to collide with the targets. movement is controlled by the PlayerController
 
@@ -60,9 +59,6 @@ round score is stored in a scriptable object  PlayerData.
 
 targets and bonuses prefab contains their own scoring value and passes the value to game manager.
 
-## Design decisions
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/65217e38-eae0-4563-8d80-78333f8a1351/Untitled.png)
 
 ## Scalability
 

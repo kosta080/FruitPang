@@ -13,20 +13,21 @@ public class MenuBtn : MonoBehaviour
     private IEnumerator startGame()
     {
         SoundManager.Instance.PlaySfx(SoundManager.Instance.buttonSound);
-        yield return new WaitForSeconds(ACTIONDELAY);
+        yield return new WaitForSecondsRealtime(ACTIONDELAY);
         SceneManager.LoadScene("Level", LoadSceneMode.Single);
     }
     private IEnumerator exitGame()
     {
         SoundManager.Instance.PlaySfx(SoundManager.Instance.buttonSound);
-        yield return new WaitForSeconds(ACTIONDELAY);
+        yield return new WaitForSecondsRealtime(ACTIONDELAY);
         Application.Quit();
     }
     private IEnumerator goToMainMenu()
     {
         SoundManager.Instance.PlaySfx(SoundManager.Instance.buttonSound);
-        yield return new WaitForSeconds(ACTIONDELAY);
+        yield return new WaitForSecondsRealtime(ACTIONDELAY);
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
+
 
 }

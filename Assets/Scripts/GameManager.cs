@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator winLevel()
     {
+        playerController.SetIdle();
         splashTextManager.ShowWin();
         playerData.StoreTimeLift(TimerLogic.Instance.SecondsLeft, timeLeftRate);
         yield return new WaitForSecondsRealtime(2.0f);

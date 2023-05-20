@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour
         characterAnimator.SetBool("Run", false);
         characterSprite.flipX = false;
     }
+    public void SetIdle()
+    {
+        characterAnimator.SetBool("Run", false);
+    }
     public void StartDeathAnim()
     {
         characterAnimator.SetTrigger("Death");

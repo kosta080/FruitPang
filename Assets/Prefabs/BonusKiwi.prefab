@@ -146,5 +146,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0af1f6296c52f054db88bd8635ce5dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusScoreValue: 8
   bonusSpoilTime: 2
+  bonusScoreValue: 11

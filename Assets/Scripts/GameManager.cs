@@ -37,8 +37,12 @@ public class GameManager : MonoBehaviour
     public void TargetHit(int scoreValue)
     {
         playerData.AddScore(scoreValue);
-
-        if (winCheck()) 
+        StartCoroutine(winCheck());
+    }
+    private IEnumerator winCheck()
+    {
+        yield return new WaitForEndOfFrame();
+        if (targetContainer.childCount == 0) 
         {
             Time.timeScale = 0;
             StartCoroutine(winLevel());
@@ -94,10 +98,6 @@ public class GameManager : MonoBehaviour
         playerData.StoreTimeLift(TimerLogic.Instance.SecondsLeft, timeLeftRate);
         yield return new WaitForSecondsRealtime(2.0f);
         SceneManager.LoadScene("Summary", LoadSceneMode.Single);
-    }
-    private bool winCheck()
-    {
-        return targetContainer.childCount <= 1;
     }
 
     private void Awake()

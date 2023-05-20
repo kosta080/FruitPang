@@ -147,8 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3518c45394864a44fa28ed01cb28267b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetScoreValue: 5
-  audioSourceTarget: {fileID: 8990481130206032208}
+  targetScoreValue: 4
 --- !u!82 &8990481130206032208
 AudioSource:
   m_ObjectHideFlags: 0

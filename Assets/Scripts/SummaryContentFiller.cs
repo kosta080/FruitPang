@@ -14,10 +14,10 @@ public class SummaryContentFiller : MonoBehaviour
 		string summaryText1 = string.Format("Congratulations you won! \n you got {0} bace points and {1} for the time left", playerData.PlayerScore, playerData.PlayerTimeLeftrScore);
 		string summaryText2 = string.Format("TOTAL : {0}", playerData.PlayerTotalScore);
 		string summaryText3;
-		if (playerData.PlayerTotalScore > playerData.PlayerBestScore)
+		if (playerData.PlayerTotalScore >= playerData.PlayerBestScore)
 			summaryText3 = string.Format("This is your new best score !!!");
 		else
-			summaryText3 = string.Format("best score : {0}", playerData.PlayerBestScore);
+			summaryText3 = string.Format("Best score : {0}", playerData.PlayerBestScore);
 
 		textField1.text = summaryText1;
 		textField2.text = summaryText2;

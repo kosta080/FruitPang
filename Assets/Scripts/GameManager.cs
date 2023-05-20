@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform bonusesContainer;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private SplashTextManager splashTextManager;
+    [Header("Scoring")]
+    [SerializeField] private int timeLeftRate;
+    [Header("Debug Mode")]
     [SerializeField] private bool godMode;
     [SerializeField] private bool infenateTimeMode;
 
@@ -88,6 +91,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator winLevel()
     {
         splashTextManager.ShowWin();
+        playerData.StoreTimeLift(TimerLogic.Instance.SecondsLeft, timeLeftRate);
         yield return new WaitForSecondsRealtime(2.0f);
         SceneManager.LoadScene("Summary", LoadSceneMode.Single);
     }

@@ -3,11 +3,24 @@ using UnityEngine.UI;
 
 public class SummaryContentFiller : MonoBehaviour
 {
-	[SerializeField] private Text SummaryText;
+	[SerializeField] private Text textField1;
+	[SerializeField] private Text textField2;
+	[SerializeField] private Text textField3;
+
 	[SerializeField] private PlayerData playerData;
-	private const string SCORE_MESSAGE_PREFIX = "Congratulations you won! your score is ";
+
 	private void Start()
 	{
-		SummaryText.text = SCORE_MESSAGE_PREFIX + playerData.PlayerScore;
+		string summaryText1 = string.Format("Congratulations you won! \n you got {0} bace points and {1} for the time left", playerData.PlayerScore, playerData.PlayerTimeLeftrScore);
+		string summaryText2 = string.Format("TOTAL : {0}", playerData.PlayerTotalScore);
+		string summaryText3;
+		if (playerData.PlayerTotalScore > playerData.PlayerBestScore)
+			summaryText3 = string.Format("This is your new best score !!!");
+		else
+			summaryText3 = string.Format("best score : {0}", playerData.PlayerBestScore);
+
+		textField1.text = summaryText1;
+		textField2.text = summaryText2;
+		textField3.text = summaryText3;
 	}
 }

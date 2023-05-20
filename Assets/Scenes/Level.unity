@@ -478,8 +478,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 14.400024, y: -27}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 24.099976, y: -35.3}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &665059248
 MonoBehaviour:
@@ -941,8 +941,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -50, y: -0.7000122}
-  m_SizeDelta: {x: 170, y: 170}
+  m_AnchoredPosition: {x: -1, y: -38.5}
+  m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &855459210
 MonoBehaviour:
@@ -1188,8 +1188,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -240.41998, y: -0.7000122}
-  m_SizeDelta: {x: 170, y: 170}
+  m_AnchoredPosition: {x: -347.69012, y: -38.5}
+  m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1074173565
 MonoBehaviour:
@@ -1464,6 +1464,7 @@ MonoBehaviour:
   bonusesContainer: {fileID: 1979453030}
   playerController: {fileID: 1393668221}
   splashTextManager: {fileID: 465266059}
+  timeLeftRate: 1
   godMode: 0
   infenateTimeMode: 0
 --- !u!1 &1350497445
@@ -1874,8 +1875,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 1384291055}
-  moveSpeed: 2
-  fireDelay: 0.8
+  moveSpeed: 3
+  fireDelay: 0.7
   initialPlayerPosition: {x: 0, y: -2.939, z: 0}
 --- !u!1 &1483208298
 GameObject:
@@ -2146,8 +2147,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 50, y: -0.7000122}
-  m_SizeDelta: {x: 170, y: 170}
+  m_AnchoredPosition: {x: 36, y: -38.5}
+  m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1754475453
 MonoBehaviour:

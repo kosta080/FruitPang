@@ -1,11 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BonusPhisics : MonoBehaviour
 {
-    [SerializeField] private int bonusScoreValue;
+    
     [SerializeField] private float bonusSpoilTime;
+    [Header("Scoring")]
+    [SerializeField] private int bonusScoreValue;
     public void SetPos(Vector3 _position)
     {
         transform.position = _position;

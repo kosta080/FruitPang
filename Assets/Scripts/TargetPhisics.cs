@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class TargetPhisics : MonoBehaviour
 {
+	[Header("Scoring")]
 	[SerializeField] private int targetScoreValue;
+
 	private Rigidbody2D rb;
 	private float[] scales = { 12.0f ,10.0f,8.0f,4.0f}; // initial scale biggerst target
 	private int scaleState = 0;

@@ -8,7 +8,7 @@ public class TimerLogic : MonoBehaviour
     [SerializeField] private float roundTime;
     [SerializeField] private TimerDisplay timerDisplay;
 
-    private int secondsLeft;
+    public int SecondsLeft { get; private set; }
     private float roundTimeCount;
     private bool roundStarted;
     public void ResetRoundTime()
@@ -38,10 +38,10 @@ public class TimerLogic : MonoBehaviour
         }
 
         int secondsLeftNew = (int)Mathf.Floor(roundTimeCount);
-        if (secondsLeft != secondsLeftNew)
+        if (SecondsLeft != secondsLeftNew)
         {
-            secondsLeft = secondsLeftNew;
-            timerDisplay.UpdateTime(secondsLeft);
+            SecondsLeft = secondsLeftNew;
+            timerDisplay.UpdateTime(SecondsLeft);
         }
     }
     private void Awake()

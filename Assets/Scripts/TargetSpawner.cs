@@ -9,7 +9,6 @@ public class TargetSpawner : MonoBehaviour
 	[SerializeField] private GameObject bonusesContainer;
     [SerializeField] private GameObject targetPrefab;
     [SerializeField] private GameObject[] bonussPrefabs;
-	//[SerializeField] private int targetsSpawnCount;
 	[SerializeField] private float spawnTimeInterval;
 	[SerializeField] private float chenceBonusSpawn;
 
